@@ -604,7 +604,7 @@ public class BillingPage extends BasePage {
 	}
 
 	// match disabled columns count
-	public void disbaledColumnCount(int disabledCount) {
+	public void disabledColumnCount(int disabledCount) {
 		int Actualcount = DisabledColumns.size();
 		disabledCount = disabledCount + 1;
 		Assert.assertEquals(disabledCount, Actualcount);
