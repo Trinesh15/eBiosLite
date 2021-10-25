@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class BillingPage extends BasePage {
+	
 
 	// Enter UHID
 	@FindBy(id = "cpBody_txtUHID")
