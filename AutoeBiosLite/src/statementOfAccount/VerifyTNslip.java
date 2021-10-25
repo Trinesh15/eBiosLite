@@ -36,6 +36,7 @@ public class VerifyTNslip extends BaseTest
 		UserProfileOption up = new UserProfileOption(driver);
 		up.ClickOnUserName();
 		up.ClickLogout();
+		
 	}
 
 }
