@@ -33,6 +33,7 @@ public class BillingPage extends BasePage {
 	// Click on Department dropdown
 	@FindBy(xpath = "//div[@id='cpBody_usrPatVisit_cmbDepartment_chosen']")
 	private WebElement DeptDropDown;
+	
 
 	// Select Clinical laboratory department
 	@FindBy(xpath = "//div[@class='chosen-drop']//li[.='CLINICAL LABORATORY']")
