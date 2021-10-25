@@ -9,4 +9,5 @@ public interface AutoConst {
 	public String GECKO_VALUE = "./driver/geckodriver.exe";
 	
 	public String INPUT = "./input/input.xlsx";
+	
 }

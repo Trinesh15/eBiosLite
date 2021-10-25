@@ -22,6 +22,7 @@ public class ChargeSheetModule extends BaseTest
 				logIn.clickLogin();
 				logIn.VerifyChargesheetTitle();
 				Thread.sleep(1000);
+				
 	}
 
 }

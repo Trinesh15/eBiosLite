@@ -45,7 +45,7 @@ public abstract class BaseTest implements AutoConst {
 //		
 //	}
 	
-	//Login to the application using valid User name and password
+
 	
 
 	

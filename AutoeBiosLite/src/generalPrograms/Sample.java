@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Sample {
+	
 	public static void main(String[] args) {
 //		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
 //		WebDriver driver = new ChromeDriver();
