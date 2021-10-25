@@ -60,11 +60,14 @@ public class UserProfileOption extends BasePage {
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(Logout)).click();
 	}
 
+	//Verify Logged in user
 	public void VerifyLoginUserName(String un) {
 		String ActualUserName = un;
-		String ExpectedUserName = UserName.getText();
-		
-		//Assert.assertEquals(ExpectedUserName, ActualUserName);
+		String ExpectedUserName = UserName.getText();	
+		Assert.assertEquals(ExpectedUserName, ActualUserName);
 	}
+	
+	
+	
 
 }
