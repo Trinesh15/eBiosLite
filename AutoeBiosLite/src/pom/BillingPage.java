@@ -1,5 +1,7 @@
 package pom;
 
+import java.util.List;
+
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -17,12 +19,12 @@ public class BillingPage extends BasePage {
 	// Enter UHID
 	@FindBy(id = "cpBody_txtUHID")
 	private WebElement UHIDNo;
-	
-	//AlertPopup
+
+	// AlertPopup
 	@FindBy(xpath = "//h5[text()='Alerts']")
 	private WebElement Alertpopup;
-	
-	//Alert Close Button
+
+	// Alert Close Button
 	@FindBy(xpath = "//button[@class='btn btn-secondary btn-sm closeChild']")
 	private WebElement AlertClose;
 
@@ -85,8 +87,12 @@ public class BillingPage extends BasePage {
 	// service textbox
 	@FindBy(xpath = "//input[@id='cpBody_txtService']")
 	private WebElement Service;
-	
-	@FindBy (id = "cpBody_txtRecptNo")
+
+	// Service Grid
+	@FindBy(xpath = "//table[@id='tblServiceDetails']//h6")
+	private List<WebElement> ServiceGridColumnNames;
+
+	@FindBy(id = "cpBody_txtRecptNo")
 	private WebElement InvoiceCode;
 
 	// doctor discount
@@ -203,36 +209,36 @@ public class BillingPage extends BasePage {
 	// Visa and Credit card in multi payment section
 	@FindBy(xpath = "//div[@id='tbBillPayment_Row1_Col0_chosen']//li[.='Cheque']")
 	private WebElement ChequePymtinMultippayment;
-	
-	//Dropdown in Insurance Carrier
+
+	// Dropdown in Insurance Carrier
 	@FindBy(xpath = "//div[@id='cpBody_usrctrlBillRcpts_drpPInsu_chosen']")
 	private WebElement InsuranceCarrier;
-	
-	//Select A.M. STUDIO OZZ LTD (SHARE)
+
+	// Select A.M. STUDIO OZZ LTD (SHARE)
 	@FindBy(xpath = "//li[text()='A.M. STUDIO OZZ LTD (SHARE)']")
 	private WebElement AMStudioOzz;
-	
-	//Select GESY (SHARE)
+
+	// Select GESY (SHARE)
 	@FindBy(xpath = "//li[text()='GESY (SHARE)']")
 	private WebElement Gesy;
-	
-	//Select BLUE CROSS INSURANCE
+
+	// Select BLUE CROSS INSURANCE
 	@FindBy(xpath = "//li[text()='BLUE CROSS INSURANCE']")
 	private WebElement BLUECROSSINSURANCE;
-	
-	//Invoice Page
+
+	// Invoice Page
 	@FindBy(xpath = "//h4[text()='Invoice']")
 	private WebElement InvoicePage;
-	
-	//Invoice Close Button
+
+	// Invoice Close Button
 	@FindBy(xpath = "(//button[@id='btnmodalClose'])[2]")
 	private WebElement InvoiceClose;
-	
-	//Receipt Page
+
+	// Receipt Page
 	@FindBy(xpath = "//h4[text()='Receipt']")
 	private WebElement Receiptpage;
-	
-	//Receipt Close Button
+
+	// Receipt Close Button
 	@FindBy(xpath = "(//button[@id='btnmodalClose'])[1]")
 	private WebElement ReceiptClose;
 
@@ -263,11 +269,36 @@ public class BillingPage extends BasePage {
 	// Print No
 	@FindBy(id = "btnDialogNo")
 	private WebElement PrintNo;
-	
-	//Clear button
-	@FindBy (id="cpBody_btnBillClose")
+
+	// Clear button
+	@FindBy(id = "cpBody_btnBillClose")
 	private WebElement Clearbtn;
 
+	// disabled columns in service grid
+	@FindBy(xpath = "//table[@id='tblServiceDetails']//th[@class='d-none']")
+	private List<WebElement> DisabledColumns;
+
+	// Print invoice icon
+	@FindBy(id = "aPrintReport")
+	private WebElement PrintInvIcon;
+
+	// Search for invoice
+	@FindBy(id = "txtPrintSearch")
+	private WebElement searchInvoice;
+
+	// Print Summary invoice
+	@FindBy(xpath = "//button[@class='btn btn-sm btn-block btn-warning']")
+	private WebElement SummaryInvPrint;
+
+	// Print Detailed Invoice
+	@FindBy(xpath = "//button[@class='btn btn-sm btn-block btn-primary']")
+	private WebElement DetailedInvPrint;
+	
+	//Close the invoice print pop up
+	@FindBy (xpath = "//h5[.='Print Invoice']/../button[@class='close']")
+	private WebElement CloseprintInvoicePOpup;
+
+	// Initialize web element
 	public BillingPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
@@ -278,19 +309,17 @@ public class BillingPage extends BasePage {
 		UHIDNo.sendKeys(UHID, Keys.ENTER);
 		// UHIDNo.sendKeys(Keys.ENTER);
 	}
-	
-	public void VerifyAlertPopup()
-	{
+
+	public void VerifyAlertPopup() {
 		String Actual = Alertpopup.getText();
- 		String Expected = "Alerts";
+		String Expected = "Alerts";
 		Assert.assertEquals(Expected, Actual);
 	}
-	
+
 	public void AlertClose() {
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(AlertClose)).click();
-		
-	}
 
+	}
 
 	public void SelectHospRadio() {
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(HospVisitRadioBtn)).click();
@@ -380,12 +409,13 @@ public class BillingPage extends BasePage {
 
 	// Add services
 	public void AddServices(String code) {
-		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(Service)).sendKeys(code, Keys.ENTER);
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(Service)).sendKeys(code,
+				Keys.ENTER);
 		// Service.sendKeys(code, Keys.ENTER);
 
 	}
-	
-	//accept okay in receipt amount zero pop up
+
+	// accept okay in receipt amount zero pop up
 	public void SaveBillForZero() {
 		driver.switchTo().alert().accept();
 	}
@@ -395,7 +425,7 @@ public class BillingPage extends BasePage {
 		int x = Clearbtn.getLocation().getX();
 		int y = Clearbtn.getLocation().getY();
 		JavascriptExecutor js = (JavascriptExecutor) driver; // Type casting
-		
+
 		js.executeScript("window.scrollBy(" + 400 + ", " + 400 + ");");
 
 	}
@@ -403,6 +433,18 @@ public class BillingPage extends BasePage {
 	// Select cash
 	public void selectCash() {
 		Cash.click();
+	}
+
+	// //Check service grid column name
+	// public void VerifyServiceGridColumnNames() {
+	// for(WebElement srvGrid : ServiceGridColumnNames) {
+	// srvGrid.getText();
+	// }
+	// }
+
+	// Service grid disabled columns
+	public void disabledServicegridColumns() {
+
 	}
 
 	// Select Visa and credit card
@@ -414,28 +456,26 @@ public class BillingPage extends BasePage {
 	public void selectInsurance() {
 		Insurance.click();
 	}
-	
-	//Click on Insurance Carrier
-	public void SelectInsuranceCarrier( ) {
-		InsuranceCarrier.click(); 
+
+	// Click on Insurance Carrier
+	public void SelectInsuranceCarrier() {
+		InsuranceCarrier.click();
 	}
-	
-	//Click on AMStudioOzz
+
+	// Click on AMStudioOzz
 	public void SelectAMStudioOzz() {
 		AMStudioOzz.click();
 	}
-	
-	//Click on  Gesy
+
+	// Click on Gesy
 	public void SelectGesy() {
 		Gesy.click();
 	}
-	
-	//Click on BLUECROSSINSURANCE
+
+	// Click on BLUECROSSINSURANCE
 	public void SelectBLUECROSSINSURANCE() {
 		BLUECROSSINSURANCE.click();
 	}
-	
-
 
 	// select Bank transfer
 	public void selectBankTransfer() {
@@ -518,48 +558,79 @@ public class BillingPage extends BasePage {
 	public void clickPrintNo() {
 		PrintNo.click();
 	}
-	
+
 	public void verifyZeroBillConfirmationPOpup() {
 		String actualmsg = driver.switchTo().alert().getText();
 		String expectedmsg = "The Receipt Amount is Zero. Do you need to continue?";
 		Assert.assertEquals(expectedmsg, actualmsg);
 	}
-	
-	//Returns Invoice Code
+
+	// Returns Invoice Code
 	public String getInvoiceCode() {
 		String invcode[] = InvoiceCode.getText().split(" ");
 		return invcode[2];
 	}
-	
+
 	public void AcceptInsuranceChangePopup() {
 		String actualmsg = driver.switchTo().alert().getText();
 		String expectedmsg = "Selected Insurance Carrier does not match insurance details set for the patient. Would you like to continue?";
 		Assert.assertEquals(expectedmsg, actualmsg);
 		driver.switchTo().alert().accept();
 	}
-	
+
 	public void verifyInvoicePagePopup() {
 		String actualmsg = InvoicePage.getText();
 		String expectedmsg = "Invoice";
 		Assert.assertEquals(expectedmsg, actualmsg);
-		//SelectInvoiceClose;
+		// SelectInvoiceClose;
 	}
-	
+
 	public void closeInvoicePopup() {
-		
+
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(InvoiceClose)).click();
-		//InvoiceClose.click();
+		// InvoiceClose.click();
 	}
+
 	public void verifyReceiptPagePopup() {
 		String actualmsg = Receiptpage.getText();
 		String expectedmsg = "Receipt";
 		Assert.assertEquals(expectedmsg, actualmsg);
-		
+
 	}
+
 	public void closeReceiptPopup() {
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(ReceiptClose)).click();
-		//ReceiptClose.click();
+		// ReceiptClose.click();
+	}
+
+	// match disabled columns count
+	public void disabledColumnCount(int disabledCount) {
+		int Actualcount = DisabledColumns.size();
+		disabledCount = disabledCount + 1;
+		Assert.assertEquals(disabledCount, Actualcount);
+
+	}
+
+	// Search and add invoice record to grid
+	public void searchInvoice() throws InterruptedException {
+		searchInvoice.sendKeys(InvoiceCode.getText());
+		Thread.sleep(2000);
+		searchInvoice.sendKeys(Keys.ARROW_DOWN, Keys.RETURN);
+	}
+
+	// print summary invoice from the print invoice pop up
+	public void printSummaryInvoice() {
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(SummaryInvPrint)).click();
+	}
+
+	// print summary invoice from the print invoice pop up
+	public void printDetailedInvoice() {
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(DetailedInvPrint)).click();
 	}
 	
+	//close the invoice print pop up
+	public void closePrintInvoicePopup() {
+		CloseprintInvoicePOpup.click();
+	}
 
 }
