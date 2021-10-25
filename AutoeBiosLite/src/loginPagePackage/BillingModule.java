@@ -21,7 +21,7 @@ public class BillingModule extends BaseTest {
 		logIn.clickLogin();
 		Thread.sleep(1000);
 		logIn.VerifyBillingTitle();
-		//logout();
+	
 
 	}
 
