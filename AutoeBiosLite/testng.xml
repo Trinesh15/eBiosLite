@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="billingPackage.ValidBilling"/>
+      <class name="loginPagePackage.HomeModule"/>
+      <class name="loginPagePackage.DebitinvoiceModule"/>
+      <class name="statementOfAccount.VerifySummaryA5"/>
+      <class name="loginPagePackage.InvalidLoginPWD"/>
+      <class name="statementOfAccount.VerifySummaryA4"/>
+      <class name="loginPagePackage.ReceiptsModule"/>
+      <class name="statementOfAccount.VerifyPDlink"/>
+      <class name="loginPagePackage.InvalidLogin"/>
+      <class name="statementOfAccount.CheckSOA"/>
+      <class name="loginPagePackage.InvalidLoginUN"/>
+      <class name="loginPagePackage.RevisitModule"/>
+      <class name="scripts.ValidBilling"/>
+      <class name="scripts.ValidRegistrationHospVisit"/>
+      <class name="loginPagePackage.StatementofaccountModule"/>
+      <class name="loginPagePackage.MultiuserLogin"/>
+      <class name="loginPagePackage.EditNHSClaim"/>
+      <class name="loginPagePackage.LaboratoryModule"/>
+      <class name="statementOfAccount.SoAinlogin"/>
+      <class name="statementOfAccount.VerifyTNDetails"/>
+      <class name="statementOfAccount.VerifyInvoiceSummary"/>
+      <class name="registrationPackage.ValidRegistrationHospVisit"/>
+      <class name="generic.VerifyTNslip"/>
+      <class name="statementOfAccount.SearchName"/>
+      <class name="loginPagePackage.Validlogin"/>
+      <class name="loginPagePackage.BillingModule"/>
+      <class name="scripts.Validlogin"/>
+      <class name="loginPagePackage.RegistrationModule"/>
+      <class name="statementOfAccount.VerifyInvoiceinSOA"/>
+      <class name="statementOfAccount.RefundAmount"/>
+      <class name="statementOfAccount.AdmittedpatientSearch"/>
+      <class name="statementOfAccount.AdvanceSearchPatient"/>
+      <class name="loginPagePackage.ChargeSheetModule"/>
+      <class name="statementOfAccount.VerifyDetailedA4"/>
+      <class name="loginPagePackage.ValidloginForUser"/>
+      <class name="statementOfAccount.VerifyDetailedA5"/>
+      <class name="statementOfAccount.VerifyRefundAmountinSOA"/>
+      <class name="statementOfAccount.VerifyInvoiceDetailed"/>
+      <class name="statementOfAccount.AdvanceSearch"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
