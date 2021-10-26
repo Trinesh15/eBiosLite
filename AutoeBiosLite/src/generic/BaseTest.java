@@ -25,7 +25,7 @@ public abstract class BaseTest implements AutoConst {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get("http://192.168.1.13:8085/eBiosLite/(S(rjbqnu2isbvke145c141l5lv))/eBiosFiles/CommonForms/frmLogin.aspx");
+		driver.get("http://192.168.1.13:8085/eBiosLite/(S())/eBiosFiles/CommonForms/frmLogin.aspx");
 	}
 	
 //	//open the browser in Firefox
@@ -39,7 +39,7 @@ public abstract class BaseTest implements AutoConst {
 //	}
 	
 //	//Close the current browser
-	@AfterMethod
+//	@AfterMethod
 //	public void closeApp() {
 //		driver.close();
 //		

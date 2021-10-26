@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import generic.BaseTest;
 import generic.Excel;
+import pom.BasePage;
 import pom.BillingPage;
 import pom.LogInPage;
 import pom.StatementofAccountPage;
@@ -52,7 +53,8 @@ public class VerifyTNDetails extends BaseTest
 		bp.clickPrintNo();
 		
 		StatementofAccountPage SOA = new StatementofAccountPage(driver);
-		
+		BasePage basepage = new BasePage(driver);
+		basepage.NaviagetToStatementofAccount();
 		SOA.setUHID(UHID);
 		SOA.PrintTransferOutDetailed();
 	}

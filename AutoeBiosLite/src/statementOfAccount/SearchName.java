@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import generic.BaseTest;
 import generic.Excel;
+import pom.BasePage;
 import pom.LogInPage;
 import pom.StatementofAccountPage;
 
@@ -24,6 +25,8 @@ public class SearchName extends BaseTest
 		logIn.clickLogin();
 		
 		StatementofAccountPage SOA = new StatementofAccountPage(driver);
+		BasePage basepage = new BasePage(driver);
+		basepage.NaviagetToStatementofAccount();
 		SOA.setUHID(UHID);
 		
 	}
