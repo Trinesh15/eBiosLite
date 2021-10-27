@@ -32,7 +32,7 @@ public class ValidRegistrationHospVisit extends BaseTest {
 			      logIn.clickLogin();
 		
 	    RegistrationPage RegPage = new RegistrationPage(driver);
-	    			 
+	    		//	 navigativeToRegistration();
 				     RegPage.clickpicdropdown();
 				     RegPage.clickGesy();
 	                 RegPage.clickTitle();
