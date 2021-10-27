@@ -6,6 +6,7 @@ import generic.BaseTest;
 import generic.Excel;
 import pom.BasePage;
 import pom.LogInPage;
+import pom.NavigateToPages;
 import pom.StatementofAccountPage;
 
 public class ClickCreditNotePrint extends  BaseTest{
@@ -26,8 +27,8 @@ public class ClickCreditNotePrint extends  BaseTest{
 		logIn.clickLogin();   // click on login button 
 		
 		StatementofAccountPage SOA = new StatementofAccountPage(driver);
-		BasePage basepage = new BasePage(driver);
-		basepage.NaviagetToStatementofAccount();
+		NavigateToPages  navigate = new NavigateToPages(driver);
+		navigate.NaviagetToStatementofAccount();
 		SOA.setUHID(UHID);
 		//SOA.PrintCreditNoteSlip();
 //		SOA.PrintInvoiceSummary();
