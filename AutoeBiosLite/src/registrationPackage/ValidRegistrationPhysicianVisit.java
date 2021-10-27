@@ -8,10 +8,10 @@ import generic.Excel;
 import pom.LogInPage;
 import pom.RegistrationPage;
 
-public class ValidRegistrationHospVisit extends BaseTest {
-
+public class ValidRegistrationPhysicianVisit extends BaseTest {
+	
 	@Test
-	public void testValidRegistrationHV() throws InterruptedException {
+	public void testValidRegistrationPV() throws InterruptedException {
 		// Read Data From Excel
 		String Fname = Excel.getCellData(INPUT, "Registration", 1, 0);
 		String Lname = Excel.getCellData(INPUT, "Registration", 2, 0);
@@ -35,7 +35,8 @@ public class ValidRegistrationHospVisit extends BaseTest {
 		String PhNo2 = Excel.getCellData(INPUT, "Registration", 20, 0);
 		String InsRamarks = Excel.getCellData(INPUT, "Registration", 21, 0);
 		String LinkUHID = Excel.getCellData(INPUT, "Registration", 22, 0);
-		String LinkPatRmrk = Excel.getCellData(INPUT, "Registration", 23, 0); 
+		String LinkPatRmrk = Excel.getCellData(INPUT, "Registration", 23, 0);
+		
 		
 
 		// lOGIN USER NAME AND PASSWORD
@@ -52,20 +53,23 @@ public class ValidRegistrationHospVisit extends BaseTest {
 		RegPage.clickpicdropdown();
 		RegPage.clickGesy();
 		RegPage.clickTitle();
-		RegPage.clickBaby();
+		RegPage.clickMiss();
 		RegPage.setFirstName(Fname);
 		RegPage.setLastNmae(Lname);
-		RegPage.setDOB(Age);
-		RegPage.clickSexDropDown();
-		RegPage.clickMale();
+		RegPage.clickAgeRadioBtn();
+		RegPage.setAgeTextBox(Age);
+		RegPage.clickChooseContainerDrodown();
+		RegPage.clickYear();
+		// RegPage.clickSexDropDown();
 		RegPage.setIDArcno(IDArc);
 		RegPage.setIntIDPassport(PassportID);
 		RegPage.setMobileno(Mobile);
-//				     RegPage.clickDatPtotectionBox();
+        // RegPage.clickDatPtotectionBox();
 		RegPage.setAddress(Addrs);
 		scrollpage("//div[@id='cpBody_cmbDepartment_chosen']//a");
-		RegPage.clickdepartment();
-		RegPage.clickClinicalLaboratory();
+		RegPage.clickPhyradiobutton();
+		RegPage.clickPhysiciandropdown();
+		RegPage.clickAgamemnonArgirou();
 		RegPage.clickReferralSource();
 		RegPage.clickAdamosAdamou_Ref();
 		RegPage.ClickMembershipScheme();
@@ -74,7 +78,7 @@ public class ValidRegistrationHospVisit extends BaseTest {
 		RegPage.ClickNextOfKin();
 		RegPage.ClickAddNextOfKin();
 		RegPage.ClickNokTitle();
-		RegPage.clickBaby();
+		RegPage.ClickTitleBaby();
 		RegPage.setNokfirstname(NokFname);
 		RegPage.setNokLastName(NokLname);
 		RegPage.setNokAddress(NokAdrs);
@@ -90,6 +94,7 @@ public class ValidRegistrationHospVisit extends BaseTest {
 		RegPage.ClickAdacInsurance();
 		RegPage.setPolicyHolderTxtBox(PolicyHolder);
 		RegPage.setPolicyNumberTxtBox(PolicyNo);
+		RegPage.setGroupNumberTxtBox(GroupNo);
 		RegPage.setGuarantorTxtBox(Guarantor);
 		scrollpage("//div//textarea[@id='cpBody_usrOpIpInsur_txtAddress']");
 		scrollpage("//div//input[@id='cpBody_usrOpIpInsur_txtMobileNo']");
@@ -97,6 +102,8 @@ public class ValidRegistrationHospVisit extends BaseTest {
 
 		RegPage.ClickRelationDropDown();
 		RegPage.ClickrelBrother();
+		
+		
 		
 		RegPage.setAddress1(Adrs1);
 		RegPage.setAddress2(Adrs2);
@@ -115,8 +122,7 @@ public class ValidRegistrationHospVisit extends BaseTest {
 		RegPage.ClickNewPatientLinkSave();
 		scrollpage("//div//button[@id='btnSaveRegistration']");
 		RegPage.clickSave();
-		
-
+		RegPage.RegSaveConfirmpopup();
 	}
-
+	
 }
