@@ -3,6 +3,7 @@ package pom;
 import java.util.List;
 
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +26,7 @@ public class BillingPage extends BasePage {
 	private WebElement Alertpopup;
 
 	// Alert Close Button
-	@FindBy(xpath = "//button[@class='btn btn-secondary btn-sm closeChild']")
+	@FindBy(xpath = "//button[@class='close closeChild']")
 	private WebElement AlertClose;
 
 	// Select Hospital visit radio button
@@ -297,6 +298,10 @@ public class BillingPage extends BasePage {
 	//Close the invoice print pop up
 	@FindBy (xpath = "//h5[.='Print Invoice']/../button[@class='close']")
 	private WebElement CloseprintInvoicePOpup;
+	
+	//balance amount fetch
+	@FindBy (xpath = "//div[@id='dvSub']//label[@id='lblBal']")
+	private WebElement BalanceAmt;
 
 	// Initialize web element
 	public BillingPage(WebDriver driver) {
@@ -310,13 +315,15 @@ public class BillingPage extends BasePage {
 		// UHIDNo.sendKeys(Keys.ENTER);
 	}
 
-	public void VerifyAlertPopup() {
+	public void VerifyAlertPopup() throws InterruptedException {
+		Thread.sleep(2000);
 		String Actual = Alertpopup.getText();
 		String Expected = "Alerts";
 		Assert.assertEquals(Expected, Actual);
 	}
 
-	public void AlertClose() {
+	public void AlertClose() throws InterruptedException {
+		Thread.sleep(2000);
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(AlertClose)).click();
 
 	}
@@ -389,6 +396,7 @@ public class BillingPage extends BasePage {
 	// Read Total amt
 	public String checkTotalNetAmt() {
 		String TotalnAmt = TotalNetAmt.getText();
+		System.out.println(TotalnAmt);
 		return TotalnAmt;
 	}
 
@@ -632,5 +640,30 @@ public class BillingPage extends BasePage {
 	public void closePrintInvoicePopup() {
 		CloseprintInvoicePOpup.click();
 	}
+	
+	//Get the Balance amount from the billing screen
+	public String getBalanceAmt() {
+		return BalanceAmt.getText();
+	}
+	//clear the amount textbox.
+//	public void clearAmtTextbox() {
+//		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(amtTxtBox)).clear();
+//	}
+	//Enter half of the bill amount in amount text field
+	public void EnterBillAmount(String amt) {
+		double bAmt =Double.parseDouble(amt);
+		double halfAmt = bAmt/2;
+		amt = Double.toString(halfAmt);
+		System.out.println(amt);
+//		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(amtTxtBox)).click();
+//		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(amtTxtBox)).clear();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("document.getElementById('cpBody_usrctrlBillRcpts_txtPAmt').value=''");
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(amtTxtBox)).sendKeys(amt);
+				
+	}
+	
+	
+	
 
 }

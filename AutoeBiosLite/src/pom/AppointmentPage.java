@@ -100,7 +100,7 @@ public class AppointmentPage extends BasePage {
 	private WebElement searchResource_3;
 	
 	//Appointment booking slots
-	@FindBy()
+	
 
 	public AppointmentPage(WebDriver driver) {
 		super(driver);

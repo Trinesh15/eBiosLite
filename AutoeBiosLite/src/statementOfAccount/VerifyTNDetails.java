@@ -7,6 +7,7 @@ import generic.Excel;
 import pom.BasePage;
 import pom.BillingPage;
 import pom.LogInPage;
+import pom.NavigateToPages;
 import pom.StatementofAccountPage;
 
 public class VerifyTNDetails extends BaseTest
@@ -31,6 +32,7 @@ public class VerifyTNDetails extends BaseTest
 		BillingPage bp = new BillingPage(driver);
 		bp.setUHIDNo(UHID);
 		bp.AlertClose();
+		//bp.clickOkay();
 		// reading data from excel using for loop
 		for(int n=7;n<=10;n++) 
 		{
@@ -53,9 +55,10 @@ public class VerifyTNDetails extends BaseTest
 		bp.clickPrintNo();
 		
 		StatementofAccountPage SOA = new StatementofAccountPage(driver);
-		BasePage basepage = new BasePage(driver);
-		basepage.NaviagetToStatementofAccount();
+		NavigateToPages  navigate = new NavigateToPages(driver);
+		navigate.NaviagetToStatementofAccount();
 		SOA.setUHID(UHID);
+		SOA.Alertclose();
 		SOA.PrintTransferOutDetailed();
 	}
 

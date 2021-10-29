@@ -563,6 +563,7 @@ public class RegistrationPage extends BasePage {
 		driver.switchTo().alert().accept();
 		Thread.sleep(10000);
 	}
+	
 
 	// Set values to the text box and drop downs
 	public void clickpicdropdown() {

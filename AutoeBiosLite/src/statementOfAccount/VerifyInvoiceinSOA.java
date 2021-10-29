@@ -7,6 +7,7 @@ import generic.Excel;
 import pom.BasePage;
 import pom.BillingPage;
 import pom.LogInPage;
+import pom.NavigateToPages;
 import pom.StatementofAccountPage;
 
 public class VerifyInvoiceinSOA extends BaseTest
@@ -52,9 +53,8 @@ public class VerifyInvoiceinSOA extends BaseTest
 		bp.clickPrintNo();
 		
 		StatementofAccountPage SOA = new StatementofAccountPage(driver);
-		BasePage basepage = new BasePage(driver);
-		basepage.NaviagetToStatementofAccount();
-		SOA.setUHID(UHID);
+		NavigateToPages  navigate = new NavigateToPages(driver);
+		navigate.NaviagetToStatementofAccount();		SOA.setUHID(UHID);
 		SOA.GetBillandReceiptCodes(invcode);
 		String OSBillamt = SOA.checkOutstandingBillAmt();
 		SOA.VerifyOutstandingBillAmt(netAmt, OSBillamt);
