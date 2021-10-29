@@ -443,6 +443,9 @@ public class BillingPage extends BasePage {
 
 	// Service grid disabled columns
 	public void disabledServicegridColumns() {
+		int Acount = DisabledColumns.size();
+		int ECount = 6;
+		Assert.assertEquals(ECount, Acount-1);
 
 	}
 
@@ -615,6 +618,7 @@ public class BillingPage extends BasePage {
 		searchInvoice.sendKeys(InvoiceCode.getText());
 		Thread.sleep(2000);
 		searchInvoice.sendKeys(Keys.ARROW_DOWN, Keys.RETURN);
+		
 	}
 
 	// print summary invoice from the print invoice pop up
@@ -622,6 +626,7 @@ public class BillingPage extends BasePage {
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(SummaryInvPrint)).click();
 	}
 
+	
 	// print summary invoice from the print invoice pop up
 	public void printDetailedInvoice() {
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(DetailedInvPrint)).click();
