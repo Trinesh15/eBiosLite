@@ -50,11 +50,12 @@ public abstract class BaseTest implements AutoConst {
 	
 
 	
-	public void scrollpage(String element) {
+	 public void scrollpage(String element) {
 		int x =driver.findElement(By.xpath(element)).getLocation().getX();
 		int y = driver.findElement(By.xpath(element)).getLocation().getY();
 		JavascriptExecutor js = (JavascriptExecutor) driver; //Type casting
-		js.executeScript("window.scrollBy(" + x + ", " + y + ");");    }
+		js.executeScript("window.scrollBy(" + x + ", " + y + ");");    
+	}
 	
 	
 }

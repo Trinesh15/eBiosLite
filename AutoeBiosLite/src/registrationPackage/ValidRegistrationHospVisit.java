@@ -63,7 +63,7 @@ public class ValidRegistrationHospVisit extends BaseTest {
 		RegPage.setMobileno(Mobile);
 //				     RegPage.clickDatPtotectionBox();
 		RegPage.setAddress(Addrs);
-		scrollpage("//div[@id='cpBody_cmbDepartment_chosen']//a");
+//		scrollpage("//div[@id='cpBody_cmbDepartment_chosen']//a");
 		RegPage.clickdepartment();
 		RegPage.clickClinicalLaboratory();
 		RegPage.clickReferralSource();
