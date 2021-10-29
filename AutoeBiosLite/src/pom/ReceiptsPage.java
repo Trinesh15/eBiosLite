@@ -344,6 +344,7 @@ public class ReceiptsPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 
+	
 
 	// Click on patient Button
 	public void clickPatient() {

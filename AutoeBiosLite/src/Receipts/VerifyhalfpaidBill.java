@@ -19,7 +19,7 @@ public class VerifyhalfpaidBill extends BaseTest
 		String un = Excel.getCellData(INPUT, "Validinput", 1, 0);
 		String pwd = Excel.getCellData(INPUT, "Validinput", 1, 1);
 		String UHID = Excel.getCellData(INPUT, "SOA",12, 1);
-		
+	
 		//creating object of login page and access the required methods.
 		LogInPage logIn = new LogInPage(driver);
 		logIn.setUsername(un); // enter the Username

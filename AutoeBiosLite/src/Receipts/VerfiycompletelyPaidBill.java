@@ -11,6 +11,7 @@ import pom.ReceiptsPage;
 
 public class VerfiycompletelyPaidBill extends BaseTest
 {
+	
 	@Test
 	public void testverifyBillinReceipts() throws InterruptedException
 	{
