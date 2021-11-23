@@ -1,5 +1,9 @@
 package InsurancetabPackage;
 
-public class VerifyPatientinInsurancetab {
+import generic.BaseTest;
+
+public class VerifyPatientinInsurancetab extends BaseTest
+{
+	
 
 }
