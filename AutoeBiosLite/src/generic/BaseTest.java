@@ -25,7 +25,7 @@ public abstract class BaseTest implements AutoConst {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.get("http://localhost:8081/ebioslite/(S())/eBiosFiles/CommonForms/frmLogin.aspx");
+		driver.get("http://localhost:8081/e-Bios01/(S())/eBiosFiles/PatientAdministration/frmPatientRegistration.aspx?x=1");
 	}
 	
 //	//open the browser in Firefox

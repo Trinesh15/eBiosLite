@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+
+
 public class BillingPage extends BasePage {
 
 	// Enter UHID
@@ -232,7 +234,7 @@ public class BillingPage extends BasePage {
 	private WebElement InvoicePage;
 
 	// Invoice Close Button
-	@FindBy(xpath = "(//button[@id='btnmodalClose'])[2]")
+	@FindBy(xpath = "//button[@id='btnmodalClose']")
 	private WebElement InvoiceClose;
 
 	// Receipt Page
@@ -302,6 +304,10 @@ public class BillingPage extends BasePage {
 	//balance amount fetch
 	@FindBy (xpath = "//div[@id='dvSub']//label[@id='lblBal']")
 	private WebElement BalanceAmt;
+	
+	//Select Amount 
+	@FindBy(xpath = "//input[@id='tbBillPayment_Row1_Col2']")
+	private WebElement Amount;
 
 	// Initialize web element
 	public BillingPage(WebDriver driver) {
@@ -416,9 +422,9 @@ public class BillingPage extends BasePage {
 	}
 
 	// Add services
-	public void AddServices(String code) {
-		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(Service)).sendKeys(code,
-				Keys.ENTER);
+	public void AddServices(String code) throws InterruptedException {
+		Thread.sleep(1000);
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(Service)).sendKeys(code,Keys.ENTER);
 		// Service.sendKeys(code, Keys.ENTER);
 
 	}
@@ -662,6 +668,15 @@ public class BillingPage extends BasePage {
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(amtTxtBox)).sendKeys(amt);
 				
 	}
+	
+	//Fetch the Amount
+	
+	 
+	public void selectAmount() 
+	{
+		String advamt = driver.findElement(By.id("tbBillPayment_Row1_Col2")).getAttribute("value");
+	}
+	
 	
 	
 	

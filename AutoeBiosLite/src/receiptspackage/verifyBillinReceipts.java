@@ -1,6 +1,6 @@
-package Receipts;
+package receiptspackage;
 
-import org.testng.Reporter;
+
 import org.testng.annotations.Test;
 
 import generic.BaseTest;
@@ -10,7 +10,7 @@ import pom.LogInPage;
 import pom.NavigateToPages;
 import pom.ReceiptsPage;
 
-public class VerifyhalfpaidBill extends BaseTest
+public class verifyBillinReceipts extends BaseTest
 {
 	@Test
 	public void testverifyBillinReceipts() throws InterruptedException
@@ -32,6 +32,7 @@ public class VerifyhalfpaidBill extends BaseTest
 		BillingPage bp = new BillingPage(driver);
 		bp.setUHIDNo(UHID);
 		bp.AlertClose();
+		//bp.clickOkay();
 		String  billcode =  bp.getInvoiceCode();
 		for(int n=7;n<=10;n++) 
 		{
@@ -41,11 +42,9 @@ public class VerifyhalfpaidBill extends BaseTest
 		bp.clickIntroducingSource();
 		bp.setPrimaryIntroSource();
 		bp.ScrolltoPayment();
-		String netAmt = bp.checkTotalNetAmt();
-		bp.selectCash();
-//		bp.clearAmtTextbox();
-		bp.EnterBillAmount(netAmt);
+		//bp.selectCash();
 		bp.clickSave();
+		bp.SaveBillForZero();
 		bp.clickPrintNo();
 		
 		ReceiptsPage rp = new ReceiptsPage(driver);
@@ -53,13 +52,14 @@ public class VerifyhalfpaidBill extends BaseTest
 		navigate.NaviagetToReceipts();
 		rp.setUHID(UHID); 	
 		rp.clickOkinAlert();
+		//rp.clickOnSelectAllCheckBox();
 		rp.selectAndPayBill(billcode);
 		rp.scrollpagetoCash();
 		rp.clickonCashButton();
 		rp.clickonSaveButton();
 		rp.VerifyReceiptPage(); 
-		
+
 	}
-		
+	
 
 }

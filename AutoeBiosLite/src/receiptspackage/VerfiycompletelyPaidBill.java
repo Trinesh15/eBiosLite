@@ -1,4 +1,4 @@
-package Receipts;
+package receiptspackage;
 
 import org.testng.annotations.Test;
 
@@ -13,7 +13,7 @@ public class VerfiycompletelyPaidBill extends BaseTest
 {
 	
 	@Test
-	public void testverifyBillinReceipts() throws InterruptedException
+	public void testVerfiycompletelyPaidBill() throws InterruptedException
 	{
 		//reading data from the excel
 		String un = Excel.getCellData(INPUT, "Validinput", 1, 0);

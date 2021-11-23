@@ -1,7 +1,5 @@
-package Receipts;
+package receiptspackage;
 
-
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
 import generic.BaseTest;
@@ -11,10 +9,10 @@ import pom.LogInPage;
 import pom.NavigateToPages;
 import pom.ReceiptsPage;
 
-public class verifyBillinReceipts extends BaseTest
+public class VerifyhalfpaidBill extends BaseTest
 {
 	@Test
-	public void testverifyBillinReceipts() throws InterruptedException
+	public void testVerifyhalfpaidBill() throws InterruptedException
 	{
 		//reading data from the excel
 		String un = Excel.getCellData(INPUT, "Validinput", 1, 0);
@@ -33,7 +31,6 @@ public class verifyBillinReceipts extends BaseTest
 		BillingPage bp = new BillingPage(driver);
 		bp.setUHIDNo(UHID);
 		bp.AlertClose();
-		//bp.clickOkay();
 		String  billcode =  bp.getInvoiceCode();
 		for(int n=7;n<=10;n++) 
 		{
@@ -43,9 +40,11 @@ public class verifyBillinReceipts extends BaseTest
 		bp.clickIntroducingSource();
 		bp.setPrimaryIntroSource();
 		bp.ScrolltoPayment();
-		//bp.selectCash();
+		String netAmt = bp.checkTotalNetAmt();
+		bp.selectCash();
+//		bp.clearAmtTextbox();
+		bp.EnterBillAmount(netAmt);
 		bp.clickSave();
-		bp.SaveBillForZero();
 		bp.clickPrintNo();
 		
 		ReceiptsPage rp = new ReceiptsPage(driver);
@@ -53,14 +52,13 @@ public class verifyBillinReceipts extends BaseTest
 		navigate.NaviagetToReceipts();
 		rp.setUHID(UHID); 	
 		rp.clickOkinAlert();
-		//rp.clickOnSelectAllCheckBox();
 		rp.selectAndPayBill(billcode);
 		rp.scrollpagetoCash();
 		rp.clickonCashButton();
 		rp.clickonSaveButton();
 		rp.VerifyReceiptPage(); 
-
+		
 	}
-	
+		
 
 }

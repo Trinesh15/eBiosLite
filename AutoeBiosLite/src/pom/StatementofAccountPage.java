@@ -361,6 +361,10 @@ public class StatementofAccountPage extends BasePage
     private WebElement Close;
     //Patient Demographic
     
+    
+    //Total Outstanding Amount
+    @FindBy(xpath = "//span[@id='cpBody_lblOtsdingAmt']")
+    private WebElement TotalOSAmt;
   
     //Intialize Elements
 	public StatementofAccountPage(WebDriver driver) 
@@ -996,5 +1000,13 @@ public class StatementofAccountPage extends BasePage
 		 TransferPayment.get(TransferPayment.size()-1).click();
 	}
 	
+	//Fetch OS Amount from Total OutStanding Amt
+	//public void SelectTotoalOSAmt() 
+	//{
+		//new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(TotalOSAmt)).getAttribute("value");
+		
+	//}
+	
+	String TotalOsAmt = driver.findElement(By.id("cpBody_lblOtsdingAmt")).getAttribute("value");
 
 }
