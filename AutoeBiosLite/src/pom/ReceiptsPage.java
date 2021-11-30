@@ -15,7 +15,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import statementOfAccount.*;
+import pom.StatementofAccountPage;
+import pom.BillingPage;
+
+
 public class ReceiptsPage extends BasePage {
 	
 
@@ -95,9 +98,8 @@ public class ReceiptsPage extends BasePage {
 	// list of bill checkbox
 	@FindBy(xpath = "//table[@id='tblOSBills']//td[1]")
 	private WebElement selectCheckbox;
-//	private List<WebElement> listofCheckbox;
 	
-	//l
+	//list of all the os patient bills check box
 	@FindBy(xpath = "//table[@id='tblOSBills']//td[1]")
 	private List<WebElement> listofCheckbox;
 
@@ -511,6 +513,99 @@ public class ReceiptsPage extends BasePage {
 	@FindBy(xpath = "//label[@id='lblINCName']")
 	private WebElement Insurancename;
 	
+	//Select Recent Patient Details in Insurance tab
+	@FindBy(xpath = "//td[contains(text(),'EVAN00')]")
+	private List<WebElement> PatientdetailsinInstab;
+	
+	//Select recent patient details in Insurance tab
+	@FindBy(xpath = "//div[@class='tableFixHead']//td[1]")
+	private List<WebElement> RecentPatdetails;
+	
+	//Select recent patient bill code in Insurance tab
+	@FindBy(xpath = "//div[@class='tableFixHead']//td[5]")
+	private List<WebElement> recentPatbillcode;
+	
+	//Select save button in Insurance tab
+	@FindBy(xpath = "//button [@id='btnSaveTrns']")
+	private WebElement SaveinInsTab;
+	
+	//Select close button in Receipts in Insurance tab
+	@FindBy(xpath = "//button[@id='btnmodalClose']")
+	private WebElement CloseReceiptinInstab;
+	
+	//Select Bank transfer button in Insurance tab
+	@FindBy(xpath = "//label[@for='cpBody_UsrTransReceipts_rdPaymenyType_0']")
+	private WebElement BanktransferinIns;
+	
+	//Select Cheque Button in Insurance Tab
+	@FindBy(xpath = "//label[@for='cpBody_UsrTransReceipts_rdPaymenyType_3']")
+	private WebElement ChequeinInstab;
+	
+	//Select Visa or Credit card button in Insurance tab
+	@FindBy(xpath = "//label[@for='cpBody_UsrTransReceipts_rdPaymenyType_2']")
+	private WebElement VisaorCreditinIns;
+	
+	//Select Multiple drop down in Insrance tab
+	@FindBy(xpath = "//label[@for='cpBody_UsrTransReceipts_rdPaymenyType_4']")
+	private WebElement MultiplePaymentinIns;
+	
+	//Select Bank drop down in Insurance Tab
+	@FindBy(xpath = "//div[@id='cpBody_UsrTransReceipts_drpPBank_chosen']")
+	private WebElement BankDdinInstab;
+	
+	//Select alpha bank in Bank Drop down in Insurance tab
+	@FindBy(xpath = "//li[text()='Alpha Bank']")
+	private WebElement AlphaBankinInsTab;
+	
+	//Select Eurobank Cyprus in Bank drop down in Insurance tab
+	@FindBy(xpath = "//li[text()='Eurobank Cyprus']")
+	private WebElement EurobankinInsTab;
+	
+	//Select RCB Bank in Bank Drop down in Insurance tab
+	@FindBy(xpath = "//li[text()='RCB Bank']")
+	private WebElement RCBbankinInstab;
+	
+	//Select payment type first option in Multiple payment in  Insurance tab
+	@FindBy(xpath = "(//div[@id='tbTrnsPayment_Row1_Col0_chosen'])[2]")
+	private WebElement firstpayinMPInstab;
+	
+	//Select Cheque in First payment option in Multiple payment in Insurance Tab
+	@FindBy(xpath = "//li[text()='Cheque']")
+	private WebElement ChequeinMPIns;
+	
+	//Select Amount text field in First option in Multiple payment in Insurance Tab
+	@FindBy(xpath = "(//input[@id='tbTrnsPayment_Row1_Col2'])[2]")
+	private WebElement AmtinFirstMPIns;
+	
+	//Select Bank drop down in First option in Multiple payment in Insurance tab
+	@FindBy(xpath = "(//div[@id='tbTrnsPayment_Row1_Col4_chosen'])[2]")
+	private WebElement BankDDinFirstMPIns;
+	
+	//Select Alpha bank in First Option in Multiple Payment in Insurance tab
+	@FindBy(xpath = "//li[text()='Alpha Bank']")
+	private WebElement AlphainFirstMPIns;
+	
+	//Select New Button in Multiple payment in Insurance Tab
+	@FindBy(xpath = "(//button[@onclick='fn_CreateRow(this);'])[2]")
+	private WebElement NewBtninMPIns;
+	
+	//Select Second payment option in Multiple payment in Insurance Tab
+	@FindBy(xpath = "(//div[@id='tbTrnsPayment_Row2_Col0_chosen'])[2]")
+	private WebElement SecondpayinMPIns;
+	
+	//Select Amount text field in Second option in Multiple payment in INsurance Tab
+	@FindBy(xpath = "(//input[@id='tbTrnsPayment_Row2_Col2'])[2]")
+	private WebElement AmtinSecondMPIns;
+	
+	
+	//Select Search text field in Second Payment option in Multiple Payment  Insurance tab
+	//@FindBy(xpath = "(//input[@class='chosen-search-input'])[18]")
+	@FindBy (className = "chosen-search-input")
+	private WebElement SearchinSecondoptionMPIns;
+	
+	//Select Third Payment option in Multiple Payment in Insurance Tab
+	@FindBy(xpath = "(//div[@id='tbTrnsPayment_Row3_Col0_chosen'])[2]")
+	private WebElement ThirdpayinMPIns;
 	
 
 	
@@ -717,9 +812,7 @@ public class ReceiptsPage extends BasePage {
 
 	}
 	
-	//Click on First Check Box in OutStanding Bill
 	
-
 	// Click On Select All
 	public void clickOnSelectAllCheckBox() {
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(SelectAll)).click();
@@ -730,6 +823,16 @@ public class ReceiptsPage extends BasePage {
 	public void clickonfirstCheckBox() 
 	{
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(selectCheckbox)).click();		
+	}
+	
+	//Click on Recent bill  
+	public void clickRecentPatient() throws InterruptedException {
+		int x = listofCheckbox.get(listofCheckbox.size()- 1).getLocation().getX();
+		int y = listofCheckbox.get(listofCheckbox.size()- 1).getLocation().getY();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(" + x + ", " + y + ");");
+		Thread.sleep(2000);
+		listofCheckbox.get(listofCheckbox.size()- 1).click();
 	}
 	
 	//Verify , Select and Pay the bill
@@ -822,6 +925,19 @@ public class ReceiptsPage extends BasePage {
 	{
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(MultiplePayment)).click();
 
+	}
+	
+	//Click on Amount text field
+	public void clickAmount() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(Amount)).click();
+		
+	}
+	
+	//Clear the amount in amount text field
+	public void clearamount() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(Amount)).clear();		
 	}
 
 	// Enter the cash
@@ -1037,15 +1153,13 @@ public class ReceiptsPage extends BasePage {
 	// Click on Visa Or Credit in Multiple Payment Insurance Page
 	public void clickVisainMPInsurance()
 	{
-		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(MultiplePaymentVisaorCredit))
-				.click();
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(MultiplePaymentVisaorCredit)).click();
 	}
 
-	// Click on Bank Transfer in Multiple Payment Isnurance Page
+	// Click on Bank Transfer in Multiple Payment Insurance Page
 	public void clickBankTransferinMPInsurance()
 	{
-		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(MultiplePaymentBankTransfer))
-				.click();
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(MultiplePaymentBankTransfer)).click();
 	}
 
 	// Click on Cheque in Multiple Payment Insurance page
@@ -1056,15 +1170,13 @@ public class ReceiptsPage extends BasePage {
 
 	// Click on Amount in Multiple Payment Insurance Page
 	public void setInsuranceAmt(String InsuranceAmount) {
-		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(MultiplePaymentAmount))
-				.sendKeys(InsuranceAmount);
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(MultiplePaymentAmount)).sendKeys(InsuranceAmount);
 
 	}
 
 	// Click on Remarks in Multiple Payment Insurance Page
 	public void setInsuranceRemarks(String Insuranceremarks) {
-		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(MultiplePaymentRemarks))
-				.sendKeys(Insuranceremarks);
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(MultiplePaymentRemarks)).sendKeys(Insuranceremarks);
 	}
 
 	// Click on Delete in Multiple Payment Insurance Page
@@ -1489,6 +1601,178 @@ public class ReceiptsPage extends BasePage {
 		Assert.assertEquals(Actual, Expected);
 		
 	}
+	
+	//Select recent patient in Inusrance tab
+	public void clickPatientdetailsinInstab() throws InterruptedException 
+	{
+		int x = PatientdetailsinInstab.get(PatientdetailsinInstab.size()- 1).getLocation().getX();
+		int y = PatientdetailsinInstab.get(PatientdetailsinInstab.size()- 1).getLocation().getY();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(" + x + ", " + y + ");");
+		Thread.sleep(2000);
+		String Actual = SelectAdPatient.get(SelectAdPatient.size()- 1).getText();
+	//	String Expected = 
+	}
+	
+	//Click recent patient tab in Insurance tab
+	public void clickRecentPatdetails() 
+	{
+		int x = RecentPatdetails.get(RecentPatdetails.size() - 1).getLocation().getX();
+		int y = RecentPatdetails.get(RecentPatdetails.size() - 1).getLocation().getY();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(" + x + ", " + y + ");");
+		RecentPatdetails.get(RecentPatdetails.size() - 1).click();
+	}
+	
+	//Click on Save Button in Insurance tab
+	public void clickSaveButtoninIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(SaveinInsTab)).click();
+		
+	}
+	
+	//Click on close receipt in Insurance tab
+	public void closeReceiptinIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(CloseReceiptinInstab)).click();
+		
+	}
+	
+	//Click on Bank Tranfer Button in Insurance Tab
+	public void clickBankTransferinIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(BanktransferinIns)).click();
+		
+	}
+	
+	//Click on Cheque Button in Insurance Tab
+	public void clickChequeinIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(ChequeinInstab)).click();
+		
+	}
+	
+	
+	//Click on visa or credit button in Insurance tab
+	public void clickVisaorCreditinIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(VisaorCreditinIns)).click();
+		
+	}
+	
+	
+	//Click on Bank Transfer drop down in Insurance Tab
+	public void clickonBankddinIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(BankDdinInstab)).click();
+	}
+	
+	//Click on Alpha bank in Bank drop down in Insurance tab
+	public void clickAlphaBankinInstab() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(AlphaBankinInsTab)).click();
+		
+	}
+	
+	//click on Euro bank Cyprus in Bank Drop down in Insurance Tab
+	public void clickEuroBankinInsTab() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(EurobankinInsTab)).click();
+		
+	}
+	
+	//Click on RCB bank in Bank Drop down in Insurance Tab
+	public void RCBBankinInsTab() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(RCBbankinInstab)).click();
+		
+	}
+	
+	//Click on First payment type option in Multiple Payment in Insurance tab
+	public void clickon1stPayinMpIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(firstpayinMPInstab)).click();
+		
+	}
+	
+	//Click on Cheque in First payment option in Multiple Payment in Insurance Tab
+	public void clickChequeinMPIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(ChequeinMPIns)).click();
+		
+	}
+	
+	//Clear Amount text field in first payment otpion in Multiple Paymnet in Insurance tab
+	public void clearAmtinFirstMPIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(AmtinFirstMPIns)).clear();
+		
+	}
+	
+	//CLick on Amount text field in First payment option in Multiple payment in Insurance tab
+	public void setAmtinFirstMPIns(String AmtinFirstMP) 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(AmtinFirstMPIns)).sendKeys(AmtinFirstMP);
+		
+	}
+	
+	//Click on Bank drop down in First payment option in Multiple payement in  Insurance tab
+	public void clickBankDDinFirstMPIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(BankDDinFirstMPIns)).click();
+		
+	}
+	
+	//Click on Alpha bank in first payment option in Multiple Payment in Insurance tab
+	public void clickAlphainFirstMPIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(AlphainFirstMPIns)).click();
+		
+	}
+	
+	
+	//Click on New Button in Multiple Payment in Insurance Tab
+	public void clickNewBtninMPIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(NewBtninMPIns)).click();
+		
+	}
+	
+	//Click on Second payment type option in Multiple Payment option in Insurance Tab
+	public void clickSecondpayinMPIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(SecondpayinMPIns)).click();
+		
+	}
+	
+	//Clear Amount text field in Second payment Option in Multiple payment in Insurance tab
+	public void clearAmtinSecondMPIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(AmtinSecondMPIns)).clear();
+		
+	}
+	
+	//click on amount text field in Second payment option in Multiple payment in Insurance tab
+	public void setAmtinSecondMPIns(String AmtinSecondMP) 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(AmtinSecondMPIns)).sendKeys(AmtinSecondMP);
+		
+	}
+	
+	//Click on Search text field in Second payment option in Multiple payment in Insurance tab
+	public void setSearchinSecondoptionMPIns(String visaPayment) 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(SearchinSecondoptionMPIns)).sendKeys(visaPayment, Keys.ENTER);
+		
+	}
+	
+	//Click on Third payment type option in Multiple Payment optionin Insurance Tab
+	public void clickThirdpayinMPIns() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(ThirdpayinMPIns)).click();
+		
+	}
+	
 
 	// Multiple Payment Insurance Alert pop up get text
 	public void InsuranceAlertText() throws InterruptedException
@@ -1513,5 +1797,35 @@ public class ReceiptsPage extends BasePage {
 		driver.switchTo().alert().accept();
 		
 	}
+	
+	//Verify Recent patient details in Patient tab
+	
+	String Actual ;
+		public void verifyRecentPatient() throws InterruptedException {
+			int x = billCodes.get(billCodes.size()- 1).getLocation().getX();
+			int y = billCodes.get(billCodes.size()- 1).getLocation().getY();
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(" + x + ", " + y + ");");
+			Thread.sleep(2000);
+			Actual = billCodes.get(billCodes.size()- 1).getText();
+		}
+		
+		//Verify Recent patient bill code in Insurance Tab
+	String Expected;
+		public void verifyrecentPatbillcode() throws InterruptedException {
+			int x = recentPatbillcode.get(recentPatbillcode.size()- 1).getLocation().getX();
+			int y = recentPatbillcode.get(recentPatbillcode.size()- 1).getLocation().getY();
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(" + x + ", " + y + ");");
+			Thread.sleep(2000);
+			Expected = recentPatbillcode.get(recentPatbillcode.size()- 1).getText();
+		}
+		
+		public void VerifyBillCodes() throws InterruptedException  {
+			Thread.sleep(2000);
+			Assert.assertEquals(Actual, Expected);	
+			System.out.println("Actual bill code "+ Actual);
+			System.out.println("Expected Bill code "+ Expected);
+		}
 	
 }

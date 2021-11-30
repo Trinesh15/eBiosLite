@@ -9,15 +9,16 @@ import pom.LogInPage;
 import pom.NavigateToPages;
 import pom.ReceiptsPage;
 
-public class VerifyPatientinInsurancetab extends BaseTest
+public class PayInsAmtusingCash extends BaseTest
 {
 	@Test
-	public void testVerifyPatientinInsurancetab() throws InterruptedException
+	public void testPayInsAmtusingCash() throws InterruptedException
 	{
 		//reading data from the excel
 		String un = Excel.getCellData(INPUT, "Validinput", 1, 0);
 		String pwd = Excel.getCellData(INPUT, "Validinput", 1, 1);
 		String UHID = Excel.getCellData(INPUT, "SOA",12, 1);
+		String service = Excel.getCellData(INPUT, "Billing", 3, 1);
 		String Inscode = Excel.getCellData(INPUT, "Insurancetab", 3, 1);
 		String Amt = Excel.getCellData(INPUT, "Receipts", 3, 1);
 		
@@ -34,35 +35,27 @@ public class VerifyPatientinInsurancetab extends BaseTest
 		BillingPage bp = new BillingPage(driver);
 		bp.setUHIDNo(UHID);
 		bp.AlertClose();
-		for(int n=3;n<=6;n++) {
-				String code = Excel.getCellData(INPUT, "Billing", n, 1);	
-			    bp.AddServices(code);
-			}
+		bp.AddServices(service);
 		bp.ScrolltoPayment();
 		bp.selectInsurance();
 		bp.SelectInsuranceCarrier();
 		bp.SelectAMStudioOzz();
-		bp.EnterBillAmount(Amt);
+		//bp.clearAmtTextbox();
 		bp.clickSave();
+		//bp.SaveBillForZero();
 		bp.InusrancepaymentAlert();
 		bp.clickPrintNo();
 		
 		ReceiptsPage rp = new ReceiptsPage(driver);
 		NavigateToPages  navigate = new NavigateToPages(driver);
 		navigate.NaviagetToReceipts();
-		rp.setUHID(UHID);
-		rp.clickOkinAlert();
-		rp.clickRecentPatient();
-		rp.verifyRecentPatient();
-		rp.scrollpagetoCash();
-		
 		rp.clickInsurance();
 		rp.verfiyInsuranceCode();
 		rp.setInsuranceNameorCode(Inscode);
 		rp.verifyInsuranceTab();
 		rp.clickRecentPatdetails();
-		rp.verifyrecentPatbillcode();
-		rp.VerifyBillCodes();
+		rp.clickCashinInsurace();
+		rp.clickSaveButtoninIns();
+		rp.closeReceiptinIns();
 	}
-
 }

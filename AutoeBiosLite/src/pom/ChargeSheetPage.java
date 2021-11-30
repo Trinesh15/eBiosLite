@@ -1,8 +1,8 @@
 package pom;
 
+import java.security.Key;
 import java.util.List;
 
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class ChagreSheetPage extends BasePage
+public class ChargeSheetPage extends BasePage
 {
 	
 	//Select UHID
@@ -241,10 +241,18 @@ public class ChagreSheetPage extends BasePage
 	@FindBy(xpath = "(//button[@class='btn btn-secondary btn-sm'])[4]")
 	private WebElement CloseAdvSearch;
 	
+	//Select Admitted patient list in Advance search page
+	@FindBy(xpath = "//td[text()=' EVAN000101020']")
+	private WebElement PatientDetailsinAdv;
+	
+	//Select Patient Demographic link 
+	@FindBy(xpath = "//a[@id='cpBody_lnklblPatHeader']")
+	private WebElement PatientDemographiclink;
 	
 	
 	
-	public ChagreSheetPage(WebDriver driver) 
+	
+	public ChargeSheetPage(WebDriver driver) 
 	{
 		super(driver);
 		// TODO Auto-generated constructor stub
@@ -261,6 +269,13 @@ public class ChagreSheetPage extends BasePage
 
 	}
 	
+	//Enter Name
+	public void setName(String name) 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(UHIDNO)).sendKeys(name);
+		
+	}
+	
 	//Click Search Button
 	public void clickonSearch()
 	{
@@ -271,6 +286,13 @@ public class ChagreSheetPage extends BasePage
 	public void setServices(String services)
 	{
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(Services)).sendKeys(services);
+	}
+	
+	//Add and Select Services and packages
+	public void addservices(String services) 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(Services)).sendKeys(services, Keys.ENTER);
+		
 	}
 	
 	//Click Service Slider
@@ -652,6 +674,41 @@ public class ChagreSheetPage extends BasePage
 	public void clickcloseinAdv() 
 	{
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(CloseAdvSearch)).click();
+		
+	}
+	
+	//Click Admitted Patient in Advance page
+	public void clickPatientDetailsinAdv() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(PatientDetailsinAdv)).click();
+		
+	}
+	
+	//Verify patient details in Advance search
+	public void VerifyPatientDetailsinAdv() throws InterruptedException 
+	{
+		Thread.sleep(2000);
+		String Actual = PatientDetailsinAdv.getText();
+		String Expected = "EVAN000101020";
+		Assert.assertEquals(Expected, Actual);
+		System.out.println(Actual);
+		System.out.println(Expected);
+	}
+	
+	//Click patient Demographic link
+	public void clickPatientDemographiclink() 
+	{
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(PatientDemographiclink)).click();
+		
+	}
+	
+	//verify patient demographic link
+	public void VerifyPatientDemographiclink() throws InterruptedException 
+	{
+		Thread.sleep(2000);
+		String Expected = PatientDemographiclink.getText();
+		String Actual = "Mr ROBERT EVANS, Male, 71 Years 0 Months 23 Days, In Patient, LOCAL PATIENT";
+		Assert.assertEquals(Expected, Actual);
 		
 	}
 	

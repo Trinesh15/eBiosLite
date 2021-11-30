@@ -28,7 +28,7 @@ public class BillingPage extends BasePage {
 	private WebElement Alertpopup;
 
 	// Alert Close Button
-	@FindBy(xpath = "//button[@class='close closeChild']")
+	@FindBy(xpath = "//button[@class='btn btn-secondary btn-sm closeChild']")
 	private WebElement AlertClose;
 
 	// Select Hospital visit radio button
@@ -328,7 +328,8 @@ public class BillingPage extends BasePage {
 		Assert.assertEquals(Expected, Actual);
 	}
 
-	public void AlertClose() throws InterruptedException {
+	public void AlertClose() throws InterruptedException 
+	{
 		Thread.sleep(2000);
 		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(AlertClose)).click();
 
@@ -651,10 +652,12 @@ public class BillingPage extends BasePage {
 	public String getBalanceAmt() {
 		return BalanceAmt.getText();
 	}
-	//clear the amount textbox.
-//	public void clearAmtTextbox() {
-//		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(amtTxtBox)).clear();
-//	}
+	
+	//clear the amount text box.
+	public void clearAmtTextbox() {
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(amtTxtBox)).clear();
+	}
+	
 	//Enter half of the bill amount in amount text field
 	public void EnterBillAmount(String amt) {
 		double bAmt =Double.parseDouble(amt);
@@ -677,7 +680,21 @@ public class BillingPage extends BasePage {
 		String advamt = driver.findElement(By.id("tbBillPayment_Row1_Col2")).getAttribute("value");
 	}
 	
+	//Click ok in alert pop up for insurance carrier payment option
+	public void InusrancepaymentAlert() throws InterruptedException 
+	{
+		Thread.sleep(2000);
+		String Actual = driver.switchTo().alert().getText();
+		String Expected = "Selected Insurance Carrier does not match insurance details set for the patient. Would you like to continue?";
+		Assert.assertEquals(Actual, Expected);
+		driver.switchTo().alert().accept();
+		
+	}
 	
+	public void BillingUHIDSave() {
+		String billUHID = driver.findElement(By.id("cpBody_txtUHID")).getAttribute("value");
+	}
+
 	
 	
 
