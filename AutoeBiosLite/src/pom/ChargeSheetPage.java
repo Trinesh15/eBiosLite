@@ -3,6 +3,7 @@ package pom;
 import java.security.Key;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -248,6 +249,10 @@ public class ChargeSheetPage extends BasePage
 	//Select Patient Demographic link 
 	@FindBy(xpath = "//a[@id='cpBody_lnklblPatHeader']")
 	private WebElement PatientDemographiclink;
+	
+	//Select delete button in the grid
+	@FindBy(xpath = "//table[@id='tblChargeSheet']//td[12]")
+	private List<WebElement> DeleteServices;
 	
 	
 	
@@ -707,9 +712,84 @@ public class ChargeSheetPage extends BasePage
 	{
 		Thread.sleep(2000);
 		String Expected = PatientDemographiclink.getText();
-		String Actual = "Mr ROBERT EVANS, Male, 71 Years 0 Months 23 Days, In Patient, LOCAL PATIENT";
+		String Actual = "Mr ROBERT EVANS, Male, 71 Years 0 Months 25 Days, In Patient, LOCAL PATIENT";
 		Assert.assertEquals(Expected, Actual);
 		
 	}
 	
+	//Click ok in Bill Already generated alert popup
+	public void clickokinBillgenerated() throws InterruptedException 
+	{
+		Thread.sleep(2000);
+		String Expected = driver.switchTo().alert().getText();
+		String Actual = "Bill is already generated for this Admission. Do you want to continue??";
+		Assert.assertEquals(Expected, Actual);
+		driver.switchTo().alert().accept();
+		
+	}
+	
+	//Delete the services
+	public void clickDeleteServices() 
+	{
+		int x = DeleteServices.get(DeleteServices.size() - 1).getLocation().getX();
+		int y = DeleteServices.get(DeleteServices.size() - 1).getLocation().getY();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(" + x + ", " + y + ");");
+		DeleteServices.get(DeleteServices.size() - 1).click();
+	}
+	
+	//Verify the Service delete pop up message 
+	public void Verifyservicedeletepopup() throws InterruptedException 
+	{
+		Thread.sleep(2000);
+		String Expected = driver.switchTo().alert().getText();
+		String Actual = "Are You Sure,You want to Delete the Record?";
+		Assert.assertEquals(Expected, Actual);
+		
+	}
+	
+	//Click ok in Service delete pop up
+	public void clickOKinservicedeletepopup() 
+	{
+		driver.switchTo().alert().accept();
+		
+	}
+	
+	//Click Cancel in Service Delete pop up
+	public void clickcancelinservicedeletepopup() 
+	{
+		driver.switchTo().alert().dismiss();
+		
+	}
+	
+	//Verify the Package delete pop up message
+	public void VerifypackageDeletepopup() throws InterruptedException 
+	{
+		Thread.sleep(2000);
+		String Expected = driver.switchTo().alert().getText();
+		String Actual = "This service belongs to a package. Are you sure want to delete all the services belongs to the package?";
+		Assert.assertEquals(Expected, Actual);
+		
+	}
+	
+	//Click OK in package delete popup
+	public void clickOKinPackagedeletepopup() 
+	{
+		driver.switchTo().alert().accept();
+		
+	}
+	
+	//Click Cancel in PAckage delete popoup
+	public void ClickCancelinPackagedeletepopup() 
+	{
+		driver.switchTo().alert().dismiss();
+		
+	}
+	
+	//Fetch the value of Service or product name
+	String ServiceinChargeSheet;
+	//public 
+	{	
+		 driver.findElement(By.id("tblChargeSheet_Row1_Col2")).getAttribute("value");
+	}
 }

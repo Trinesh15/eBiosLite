@@ -214,7 +214,7 @@ public class LogInPage extends BasePage {
 		Assert.assertEquals(ExpectedTitle, ActualTitle);
 	}
 
-	// Verify the Chargesheet page title
+	// Verify the Charge sheet page title
 	public void VerifyChargesheetTitle() {
 		String ActualTitle = driver.getTitle();
 		String ExpectedTitle = "Chargesheet";

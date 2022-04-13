@@ -10,7 +10,7 @@ import pom.LogInPage;
 public class AddServices extends BaseTest
 {
 	@Test
-	public void testVerifybyPatientName() throws InterruptedException
+	public void testAddServices() throws InterruptedException
 	{
 		//reading data from the excel
 		String un = Excel.getCellData(INPUT, "Validinput", 1, 0);
